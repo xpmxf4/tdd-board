@@ -6,7 +6,6 @@ import org.springframework.http.*;
 import org.springframework.web.bind.*;
 import org.springframework.web.bind.annotation.*;
 
-import static hailyounghan.common.exception.ErrorCode.*;
 
 
 @Slf4j
@@ -34,7 +33,7 @@ public class GlobalExceptionHandler {
         log.error("필드 에러 핸들링 : " + e.getMessage());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(ErrorResponse.fromErrorCodeToResponse(FILED_VALIDATION_FAILED));
+                .body(ErrorResponse.fromErrorCodeToResponse(ErrorCode.FILED_VALIDATION_FAILED));
     }
 
 }
