@@ -1,6 +1,7 @@
 package com.study.tddboard.member.entity;
 
 import com.study.tddboard.common.entity.*;
+import com.study.tddboard.common.util.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,17 +27,19 @@ public class Member extends BaseEntity {
         this.role = role;
     }
 
-    public Member(String username, String password, String token) {
+    public Member(String username, String password, String token) throws IllegalStateException {
         this.username = username;
         this.password = password;
 
         if (!verifyToken(token)) {
-            // 에러 처리
+            throw new IllegalArgumentException("유저 생성에 올바르지 않은 토큰이 사용되었습니다.");
         }
         this.role = Role.getRoleByRoleName(token);
     }
 
     private boolean verifyToken(String token) {
-        return false;
+        IHash iHash = new IHashImpl();
+        String roleName = iHash.decode(token);
+        return Role.getRoleByRoleName(roleName) != null;
     }
 }
