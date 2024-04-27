@@ -5,7 +5,6 @@ import com.study.tddboard.member.domain.*;
 import com.study.tddboard.member.entity.*;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.*;
-import org.springframework.boot.test.autoconfigure.orm.jpa.*;
 import org.springframework.boot.test.context.*;
 
 import java.util.*;
@@ -35,6 +34,7 @@ class MemberCustomRepositoryImplTest {
         List<Member> membersOf100 = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             Member member = new Member(String.valueOf(i), String.valueOf(i), Role.USER);
+            membersOf100.add(member);
         }
         memberRepository.saveAll(membersOf100);
     }
